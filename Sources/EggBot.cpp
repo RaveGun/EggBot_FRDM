@@ -55,7 +55,7 @@ static void Init(void)
   deviceData.rxPutFct = RxBuf_Put;
 
   /* set up to receive RX into input buffer */
-//  RxBuf_Init(); /* initialize RX buffer */
+  //  RxBuf_Init(); /* initialize RX buffer */
   /* Set up ReceiveBlock() with a single byte buffer. We will be called in OnBlockReceived() event. */
   while (AS1_ReceiveBlock (deviceData.handle, (LDD_TData *) &deviceData.rxChar,
                            sizeof(deviceData.rxChar)) != ERR_OK)
@@ -70,41 +70,6 @@ static void Init(void)
   initHardware ();
 }
 
-void test_stepper(void)
-{
-  while(1)
-  {
-    unsigned long i;
-
-    /* EGG FWD*/
-//    GPIOD4_PutVal(1); GPIOD5_PutVal(0); WAIT1_Waitms(50);
-    /* PEN FWD*/
-//    GPIOD6_PutVal(1); GPIOD7_PutVal(0);  WAIT1_Waitms(250);
-
-    for(i=0; i<16*200; i++)
-    {
-//      /*GPIOD5_PutVal(1);*/ GPIOD7_PutVal(1);
-      WAIT1_Waitus(50);
-//      /*GPIOD5_PutVal(0);*/ GPIOD7_PutVal(0);
-      WAIT1_Waitus(250);
-    }
-
-    /* EGG RWD*/
-//    GPIOD4_PutVal(0); GPIOD5_PutVal(0); WAIT1_Waitms(50);
-    /* PEN RWD*/
-//    GPIOD6_PutVal(0); GPIOD7_PutVal(0);  WAIT1_Waitms(250);
-
-    for(i=0; i<16*200; i++)
-    {
-//      /*GPIOD5_PutVal(1);*/ GPIOD7_PutVal(1);
-      WAIT1_Waitus(50);
-//      /*GPIOD5_PutVal(0);*/ GPIOD7_PutVal(0);
-      WAIT1_Waitus(250);
-    }
-
-    WAIT1_Waitms(500);
-  }
-}
 
 extern "C" void APP_Run(void);
 void APP_Run(void)
@@ -112,11 +77,10 @@ void APP_Run(void)
   Init ();
   SCmd.Init ();
 
-//  WAIT1_Waitms(500);
+  /** Startup delay */
+  WAIT1_Waitms(500);
 
-//  test_stepper();
-
-/*  SendString ((unsigned char*) "Hello World\r\n", &deviceData);*/
+  /** Wait for commands */
   for (;;)
   {
     if (RxBuf_NofElements () != 0)

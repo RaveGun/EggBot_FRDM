@@ -169,7 +169,7 @@
     </GenFiles>
     <SignalListFile>Documentation\PEX_C_Project_SIGNALS.txt</SignalListFile>
     <DestinationCompiler>GNUC</DestinationCompiler>
-    <ProjectModificationStamp>27</ProjectModificationStamp>
+    <ProjectModificationStamp>28</ProjectModificationStamp>
   </Options>
   <CpuID_2>
     <Generated>false</Generated>
